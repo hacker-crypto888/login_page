@@ -86,35 +86,18 @@ class Component2 extends React.Component {
           <br/><input className='inputtext' type="text" id="idUsername1" name="signin" value={""}/>
           <br/><input className='inputtext' type="text" id="idPassword1" name="signin" value={""}/>
           <br/><input onClick={this.signIn} type="button" id="btnSignin" name="signin" value="Sign in"/> 
-          <br/><div id="idMessage1"></div>
+          <br/><div id="idMessage1"/>
         </div>
         <div className="App">
           <br/><input className='inputtext' id="idUsername2" type="text" name="signup" value={""}/>
           <br/><input className='inputtext' id="idPassword2" type="text" name="signup" value={""}/>
           <br/><input onClick={this.signUp} type="button" id="btnSignup" name="signup" value="Sign up"/> 
-          <br/><div id="idMessage2"></div>
+          <br/><div id="idMessage2"/>
+        </div>
       </div>
     );
   }
 }
 
-const SidebarItem = (props) => (
-  <div style={{
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    padding: '5px 10px'
-  }} {...props}/>
-)
-
-const Main = (props) => (
-  <div style={{
-    flex: 1,
-    height: '100vh',
-    overflow: 'auto'
-  }}>
-    <div style={{ padding: '20px' }} {...props}/>
-  </div>
-)
 
 export default Component2;
