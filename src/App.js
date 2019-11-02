@@ -81,22 +81,26 @@ class Component2 extends React.Component {
 
   render() {
     return (
-      <form>
-        <div className="App">
-          <br/><input className='inputtext' type="text" id="idUsername1" name="signin" value={""}/>
-          <br/><input className='inputtext' type="text" id="idPassword1" name="signin" value={""}/>
-          <br/><input onClick={this.signIn} type="submit" id="btnSignin" name="signin" value="Sign in"/> 
-          <br/><div id="idMessage1"></div>
-        </div>
-      </form>
-      <form>
-        <div className="App">
-          <br/><input className='inputtext' id="idUsername2" type="text" name="signup" value={""}/>
-          <br/><input className='inputtext' id="idPassword2" type="text" name="signup" value={""}/>
-          <br/><input onClick={this.signUp} type="submit" id="btnSignup" name="signup" value="Sign up"/> 
-          <br/><div id="idMessage2"></div>
-        </div>
-      </form>
+      <div>
+        <form>
+          <div className="App">
+            <br/><input className='inputtext' type="text" id="idUsername1" name="signin" value={""}/>
+            <br/><input className='inputtext' type="text" id="idPassword1" name="signin" value={""}/>
+            <br/><input onClick={this.signIn} type="submit" id="btnSignin" name="signin" value="Sign in"/> 
+            <br/><div id="idMessage1"></div>
+          </div>
+        </form>
+      </div>
+      <div>
+        <form>
+          <div className="App">
+            <br/><input className='inputtext' id="idUsername2" type="text" name="signup" value={""}/>
+            <br/><input className='inputtext' id="idPassword2" type="text" name="signup" value={""}/>
+            <br/><input onClick={this.signUp} type="submit" id="btnSignup" name="signup" value="Sign up"/> 
+            <br/><div id="idMessage2"></div>
+          </div>
+        </form>
+      </div>
     );
   }
 }
