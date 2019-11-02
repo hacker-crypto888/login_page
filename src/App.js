@@ -76,16 +76,16 @@ class Component2 extends React.Component {
     return (
       <form>
         <div className="App">
-          <br><input id="idUsername1" name="signin" value=""/>
-          <br><input id="idPassword1" name="signin" value=""/>
-          <br><input onClick={this.signIn} type="button" id="btnSignin" name="signin" value="Sign in"/> 
-          <br><div id="idMessage1"></div>
+          <br/><input id="idUsername1" name="signin" value=""/>
+          <br/><input id="idPassword1" name="signin" value=""/>
+          <br/><input onClick={this.signIn} type="button" id="btnSignin" name="signin" value="Sign in"/> 
+          <br/><div id="idMessage1"></div>
         </div>
         <div className="App">
-          <br><input id="idUsername2" name="signup" value=""/>
-          <br><input id="idPassword2" name="signup" value=""/>
-          <br><input onClick={this.signUp} type="button" id="btnSignup" name="signup" value="Sign up"/> 
-          <br><div id="idMessage2"></div>
+          <br/><input id="idUsername2" name="signup" value=""/>
+          <br/><input id="idPassword2" name="signup" value=""/>
+          <br/><input onClick={this.signUp} type="button" id="btnSignup" name="signup" value="Sign up"/> 
+          <br/><div id="idMessage2"></div>
         </div>
       </form>
     );
