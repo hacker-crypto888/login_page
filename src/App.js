@@ -9,6 +9,13 @@ class Component2 extends React.Component {
     super(props);
     this.state = { username: '', password:'', plainTextPassword1:'',  };
   }
+  componentDidMount = () => {
+    document.getElementsByClassName('inputtext').onClick = (event) => {
+      event.target.onkeydown =(event) => {
+        event.target.focus();
+      }
+    }
+  }
   signIn = (event) => {
     document.getElementById('idUsername1').className="";
     document.getElementById('idPassword1').className="";
@@ -76,14 +83,14 @@ class Component2 extends React.Component {
     return (
       <form>
         <div className="App">
-          <br/><input id="idUsername1" name="signin" value=""/>
-          <br/><input id="idPassword1" name="signin" value=""/>
+          <br/><input className='inputtext' id="idUsername1" name="signin" value=""/>
+          <br/><input className='inputtext' id="idPassword1" name="signin" value=""/>
           <br/><input onClick={this.signIn} type="button" id="btnSignin" name="signin" value="Sign in"/> 
           <br/><div id="idMessage1"></div>
         </div>
         <div className="App">
-          <br/><input id="idUsername2" name="signup" value=""/>
-          <br/><input id="idPassword2" name="signup" value=""/>
+          <br/><input className='inputtext' id="idUsername2" name="signup" value=""/>
+          <br/><input className='inputtext'id="idPassword2" name="signup" value=""/>
           <br/><input onClick={this.signUp} type="button" id="btnSignup" name="signup" value="Sign up"/> 
           <br/><div id="idMessage2"></div>
         </div>
