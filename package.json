@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "node-fetch": "^2.6.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -19,7 +19,7 @@
     "extends": "react-app"
   },
   "engines": {
-    "node": "10.x"
+    "node": "8.x"
   },
   "browserslist": {
     "production": [
