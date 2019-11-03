@@ -11,7 +11,7 @@ class Component2 extends React.Component {
   }
   componentDidMount = () => {
     document.getElementById('idMessage1').innerHTML = 'my messageeeeee';
-    fetch('http://api-words-texts-write.herokuapp.com/test')
+    fetch('https://api-words-texts-write.herokuapp.com/test')
       .then(res=>res.text())
       .then(resp=>document.getElementById('idMessage1').innerHTML = resp)
     document.getElementsByClassName('inputtext').onClick = (event) => {
