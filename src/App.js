@@ -58,7 +58,10 @@ class Component2 extends React.Component {
     //const username = 
     //const password = 
     const username = this.state.username2;
+
     const password = this.state.password2;
+    this.setState({username});
+    this.setState({password});
     if(username.length === 0) {return;}
     if(password.length === 0) {return;}
     fetch('https://api-words-texts-write.herokuapp.com/userdata') //returns all users' pass
