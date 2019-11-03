@@ -95,25 +95,27 @@ class Component2 extends React.Component {
       .then(res => res.json())
       .then(res=>res.items)
       .then(passwords => {
-        document.getElementById('idMessage2').innerHTML += JSON.stringify(passwords);
-        if((passwords.length!==0)&&(passwords.some(x=> document.getElementById('idUsername2').value === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0)) {
-          document.getElementById('idUsername2').classList.add('error-signin');
-          document.getElementById('idPassword2').classList.add('error-signin');
-          document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
-        } else {
-          bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(document.getElementById('idPassword2').value, salt, function(err, hash) {
-                fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
-                  method: 'POST',
-                  body: JSON.stringify({"items":passwords.push({"username":document.getElementById('idUsername2').value, "password": hash})}),
-                  headers: {"Content-Type":"application/json"},
-                })
-                .then(document.getElementById('idMessage1').innerHTML='added a user')
-                .then(document.getElementById('idUsername2').value='')
-                .then(document.getElementById('idPassword2').value='')
-            });
-          });
+        //document.getElementById('idMessage2').innerHTML += JSON.stringify(passwords);
+        if(passwords.length!==0){
+          if(passwords.some(x=> document.getElementById('idUsername2').value === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0){
+            document.getElementById('idUsername2').classList.add('error-signin');
+            document.getElementById('idPassword2').classList.add('error-signin');
+            document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
+            return;
+          } 
         }
+        bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(document.getElementById('idPassword2').value, salt, function(err, hash) {
+              fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
+                method: 'POST',
+                body: JSON.stringify({"items":passwords.push({"username":document.getElementById('idUsername2').value, "password": hash})}),
+                headers: {"Content-Type":"application/json"},
+              })
+              .then(document.getElementById('idMessage1').innerHTML='added a user')
+              .then(document.getElementById('idUsername2').value='')
+              .then(document.getElementById('idPassword2').value='')
+          });
+        });
       });
   }
   onChange = (event) => {
