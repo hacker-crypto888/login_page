@@ -103,7 +103,6 @@ class Component2 extends React.Component {
         } else {
           bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(document.getElementById('idPassword2').value, salt, function(err, hash) {
-              if(passwords.length && passwords.length > 0){
                 fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
                   method: 'POST',
                   body: JSON.stringify({"items":passwords.push({"username":document.getElementById('idUsername2').value, "password": hash})}),
@@ -112,7 +111,6 @@ class Component2 extends React.Component {
                 .then(document.getElementById('idMessage1').innerHTML='added a user')
                 .then(document.getElementById('idUsername2').value='')
                 .then(document.getElementById('idPassword2').value='')
-              } 
             });
           });
         }
