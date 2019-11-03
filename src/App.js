@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 const bcrypt = require("bcryptjs");
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
 
 class Component2 extends React.Component {
   constructor(props) {
@@ -10,6 +10,9 @@ class Component2 extends React.Component {
     this.state = { username: '', password:'', plainTextPassword1:'', password1:'', username1:'', password2:'', username2:'', };
   }
   componentDidMount = () => {
+    fetch('http://api-words-texts-write.herokuapp.com/test')
+      .then(res=>res.text())
+      .then(resp=>document.getElementById('idMessage1').innerHTML = resp)
     document.getElementsByClassName('inputtext').onClick = (event) => {
       event.target.onkeydown =(event) => {
         event.target.focus();
@@ -19,27 +22,26 @@ class Component2 extends React.Component {
   signIn = (event) => {
     document.getElementById('idUsername1').className="";
     document.getElementById('idPassword1').className="";
-    const password = document.getElementById('idPassword1').value;
-    const username = document.getElementById('idUsername1').value;
-    if(username.length === 0) {return;}
+    if(document.getElementById('idPassword1').value.length === 0) {return;}
+    if(document.getElementById('idUsername1').value.length === 0) {return;}
     //const username = 
     //const password = 
     fetch('https://api-words-texts-write.herokuapp.com/userdata') //returns the json containing all the passwords
       .then(res => res.json())
       .then(passwords => {
-        if(passwords.some(x=> bcrypt.compareSync(password, x.password) && username === x.username)) {
+        document.getElementById('idMessage2').innerHTML += 'content json'+JSON.stringify(passwords);
+        if(passwords.some(x=> bcrypt.compareSync(document.getElementById('idPassword1').value, x.password) && document.getElementById('idUsername1').value === x.username)) {
           //post message to api to say that the password is correct and send the username. at reception the connection must be allowed for this user
           fetch('https://api-words-texts-write.herokuapp.com/username', {
             method: 'POST',
-            body: JSON.stringify({"username":this.state.username, "login": "correct"}),
+            body: JSON.stringify({"username":document.getElementById('idUsername1').value, "login": "correct"}),
             headers: {"Content-Type":"application/json"},
           });
-
           window.location.href="https://words-texts-write.herokuapp.com/";
         } else {
           fetch('https://api-words-texts-write.herokuapp.com/username', {
             method: 'POST',
-            body: JSON.stringify({"username":this.state.username, "login": "incorrect"}),
+            body: JSON.stringify({"username":document.getElementById('idUsername1').value, "login": "incorrect"}),
             headers: {"Content-Type":"application/json"},
           });
           document.getElementById('idUsername1').classList.add('error-signin');
@@ -53,22 +55,27 @@ class Component2 extends React.Component {
     document.getElementById('idPassword2').className="";
     //const username = 
     //const password = 
+    const username = this.state.username2;
+    const password = this.state.password2;
     fetch('https://api-words-texts-write.herokuapp.com/userdata') //returns all users' pass
       .then(res => res.json())
       .then(passwords => {
-        if(passwords.some(x=> this.state.username2 === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0) {
+        document.getElementById('idMessage2').innerHTML += JSON.stringify(passwords);
+        if(passwords.some(x=> username === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0) {
           document.getElementById('idUsername2').classList.add('error-signin');
           document.getElementById('idPassword2').classList.add('error-signin');
           document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
         } else {
           bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(this.state.password2, salt, function(err, hash) {
+            bcrypt.hash(password, salt, function(err, hash) {
               fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
                 method: 'POST',
-                body: JSON.stringify(passwords.push({"username":this.state.username2, "password": hash})),
+                body: JSON.stringify(passwords.push({"username":username, "password": hash})),
                 headers: {"Content-Type":"application/json"},
 
-              });
+              })
+              .then(res=>res.json())
+              .then(res2=>document.getElementById('idMessage2').innerHTML =res2)
               // Store hash in your password DB.
             });
           });
