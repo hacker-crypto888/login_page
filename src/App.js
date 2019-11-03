@@ -109,24 +109,23 @@ class Component2 extends React.Component {
                   body: JSON.stringify({"items":passwords.push({"username":document.getElementById('idUsername2').value, "password": hash})}),
                   headers: {"Content-Type":"application/json"},
                 })
-                //.then(res=>res.json())
-                //.then(res=>document.getElementById('idMessage2').innerHTML =res)
-                // Store hash in your password DB.
+                .then(document.getElementById('idMessage1').innerHTML='added a user')
+                .then(document.getElementById('idUsername2').value='')
+                .then(document.getElementById('idPassword2').value='')
               } else {
                 fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
                   method: 'POST',
                   body: JSON.stringify({"items":[{"username":document.getElementById('idUsername2').value, "password": hash}]}),
                   headers: {"Content-Type":"application/json"},
                 })
-                //.then(res=>res.json())
-                //.then(res2=>document.getElementById('idMessage2').innerHTML =res2)
-                // Store hash in your password DB.
+                .then(document.getElementById('idMessage1').innerHTML='added a user')
+                .then(document.getElementById('idUsername2').value='')
+                .then(document.getElementById('idPassword2').value='')
               }
             });
           });
         }
       });
-    window.location.href = '';
   }
   onChange = (event) => {
     this.setState({
