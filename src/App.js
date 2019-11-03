@@ -84,29 +84,29 @@ class Component2 extends React.Component {
     document.getElementById('idPassword2').className="";
     //const username = 
     //const password = 
-    const username2 = this.state.username2;
+    //const username2 = this.state.username2;
 
-    const password2 = this.state.password2;
-    this.setState({username2});
-    this.setState({password2});
-    if(this.state.username2.length === 0) {return;}
-    if(this.state.password2.length === 0) {return;}
+    //const password2 = this.state.password2;
+    //this.setState({username2});
+    //this.setState({password2});
+    if(document.getElementById('idUsername2').value.length === 0) {return;}
+    if(document.getElementById('idPassword2').value.length === 0) {return;}
     fetch('https://api-words-texts-write.herokuapp.com/userdata') //returns all users' pass
       .then(res => res.json())
       .then(res=>res.items)
       .then(passwords => {
         document.getElementById('idMessage2').innerHTML += JSON.stringify(passwords);
-        if((passwords.length!==0)&&(passwords.some(x=> this.state.username2 === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0)) {
+        if((passwords.length!==0)&&(passwords.some(x=> document.getElementById('idUsername2').value === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0)) {
           document.getElementById('idUsername2').classList.add('error-signin');
           document.getElementById('idPassword2').classList.add('error-signin');
           document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
         } else {
           bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(this.state.password2, salt, function(err, hash) {
+            bcrypt.hash(document.getElementById('idPassword2').value, salt, function(err, hash) {
               if(passwords.length){
                 fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
                   method: 'POST',
-                  body: JSON.stringify({"items":passwords.push({"username":this.state.username2, "password": hash})}),
+                  body: JSON.stringify({"items":passwords.push({"username":document.getElementById('idUsername2').value, "password": hash})}),
                   headers: {"Content-Type":"application/json"},
                 })
                 .then(res=>res.json())
@@ -115,7 +115,7 @@ class Component2 extends React.Component {
               } else {
                 fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
                   method: 'POST',
-                  body: JSON.stringify({"items":[{"username":this.state.username2, "password": hash}]}),
+                  body: JSON.stringify({"items":[{"username":document.getElementById('idUsername2').value, "password": hash}]}),
                   headers: {"Content-Type":"application/json"},
                 })
                 .then(res=>res.json())
