@@ -99,7 +99,8 @@ class Component2 extends React.Component {
         function sort(item) {
           return item instanceof Object;
         }
-        return res.filter(sort);
+        res.filter(sort);
+        return res;
       })
       .then(passwords => {
         if((passwords.length)&&(passwords.length!==0) && (passwords.some(x=> document.getElementById('idUsername2').value === x.username))) {
