@@ -109,7 +109,7 @@ class Component2 extends React.Component {
                   body: JSON.stringify({"items":passwords.push({"username":document.getElementById('idUsername2').value, "password": hash})}),
                   headers: {"Content-Type":"application/json"},
                 })
-                .then(res=>res.json())
+                //.then(res=>res.json())
                 //.then(res=>document.getElementById('idMessage2').innerHTML =res)
                 // Store hash in your password DB.
               } else {
@@ -118,7 +118,7 @@ class Component2 extends React.Component {
                   body: JSON.stringify({"items":[{"username":document.getElementById('idUsername2').value, "password": hash}]}),
                   headers: {"Content-Type":"application/json"},
                 })
-                .then(res=>res.json())
+                //.then(res=>res.json())
                 //.then(res2=>document.getElementById('idMessage2').innerHTML =res2)
                 // Store hash in your password DB.
               }
