@@ -136,10 +136,11 @@ class Component2 extends React.Component {
         event.target.password2,
     });
     const values = [this.state.username1, this.state.password1, this.state.username2, this.state.password2];
+    this.setState({values});
     function sort(item){
       return item.length > 0;
     }
-    if(values.filter(sort).some(x=>[' '].includes(x[x.length-1]))) {
+    if(this.state.values.filter(sort).some(x=>[' '].includes(x[x.length-1]))) {
       document.getElementsByClassName('inputtext').forEach(el => {
         if(values.filter(sort).includes(el.value)) {
           el.classList.add('error-signin');
