@@ -96,7 +96,7 @@ class Component2 extends React.Component {
       .then(res => res.json())
       .then(res=>res.items)
       .then(passwords => {
-        if((JSON.parse(passwords).length!==0) && (JSON.parse(passwords).some(x=> document.getElementById('idUsername2').value === x.username))) {
+        if((passwords.length)&&(passwords.length!==0) && (JSON.parse(passwords).some(x=> document.getElementById('idUsername2').value === x.username))) {
           document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
           return;
         }
