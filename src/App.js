@@ -73,7 +73,7 @@ class Component2 extends React.Component {
       document.getElementById('idMessage1').innerHTML = '<p style=\"color:#FF0000\">there must be an error with the password or username you entered. check them again.</p>';
       return;
     } else {
-      document.getElementById('idMessage1').innerHTML; 
+      document.getElementById('idMessage1').innerHTML=''; 
     }
       
     document.getElementById('idUsername2').className="";
