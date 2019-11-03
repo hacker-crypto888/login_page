@@ -10,6 +10,7 @@ class Component2 extends React.Component {
     this.state = { username: '', password:'', plainTextPassword1:'', password1:'', username1:'', password2:'', username2:'', };
   }
   componentDidMount = () => {
+    document.getElementById('
     fetch('http://api-words-texts-write.herokuapp.com/test')
       .then(res=>res.text())
       .then(resp=>document.getElementById('idMessage1').innerHTML = resp)
