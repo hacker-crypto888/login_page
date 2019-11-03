@@ -95,14 +95,13 @@ class Component2 extends React.Component {
       .then(res => res.json())
       .then(res=>res.items)
       .then(passwords => {
-        //document.getElementById('idMessage2').innerHTML += JSON.stringify(passwords);
-        if(passwords.length!==0){
-          if(passwords.some(x=> document.getElementById('idUsername2').value === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0){
-            document.getElementById('idUsername2').classList.add('error-signin');
-            document.getElementById('idPassword2').classList.add('error-signin');
+        if((passwords.length!==0) && (passwords.some(x=> document.getElementById('idUsername2').value === x.username))||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0){
+          document.getElementById('idUsername2').classList.add('error-signin');
+          document.getElementById('idPassword2').classList.add('error-signin');
+          if((passwords.length!==0) && (passwords.some(x=> document.getElementById('idUsername2').value === x.username))) {
             document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
-            return;
-          } 
+          }
+          return;
         }
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(document.getElementById('idPassword2').value, salt, function(err, hash) {
