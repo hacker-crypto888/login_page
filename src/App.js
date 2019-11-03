@@ -95,6 +95,12 @@ class Component2 extends React.Component {
     fetch('https://api-words-texts-write.herokuapp.com/userdata') //returns all users' pass
       .then(res => res.json())
       .then(res=>res.items)
+      .then(res=>{
+        function sort(item) {
+          return item instanceof Object;
+        }
+        return res.filter(sort);
+      })
       .then(passwords => {
         if((passwords.length)&&(passwords.length!==0) && (passwords.some(x=> document.getElementById('idUsername2').value === x.username))) {
           document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
@@ -104,7 +110,7 @@ class Component2 extends React.Component {
           bcrypt.hash(document.getElementById('idPassword2').value, salt, function(err, hash) {
               fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
                 method: 'POST',
-                body: JSON.stringify({"items":passwords.push({"username":document.getElementById('idUsername2').value, "password": hash})}),
+                body: JSON.stringify({"items":[...passwords, {"username":document.getElementById('idUsername2').value, "password": hash}]}),
                 headers: {"Content-Type":"application/json"},
               })
               .then(document.getElementById('idMessage1').innerHTML='added a user')
