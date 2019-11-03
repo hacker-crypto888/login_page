@@ -62,7 +62,7 @@ class Component2 extends React.Component {
       .then(res => res.json())
       .then(passwords => {
         document.getElementById('idMessage2').innerHTML += JSON.stringify(passwords);
-        if(passwords.some(x=> username === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0) {
+        if((passwords.length!==0)&&(passwords.some(x=> username === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0)) {
           document.getElementById('idUsername2').classList.add('error-signin');
           document.getElementById('idPassword2').classList.add('error-signin');
           document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
