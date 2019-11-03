@@ -142,7 +142,7 @@ class Component2 extends React.Component {
     }
     if(this.state.values.filter(sort).some(x=>[' '].includes(x[x.length-1]))) {
       document.getElementsByClassName('inputtext').forEach(el => {
-        if(values.filter(sort).includes(el.value)) {
+        if(this.state.values.filter(sort).includes(el.value)) {
           el.classList.add('error-signin');
         } else {
           el.classList.remove('error-signin');
