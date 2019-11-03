@@ -96,11 +96,11 @@ class Component2 extends React.Component {
       .then(res => res.json())
       .then(res=>res.items)
       .then(res=>{
-        function sort(item) {
-          return item instanceof Object;
+        if(!(res instanceof Array)) { 
+          return [] 
+        } else {
+          return res;
         }
-        res.filter(sort);
-        return res;
       })
       .then(passwords => {
         if((passwords.length)&&(passwords.length!==0) && (passwords.some(x=> document.getElementById('idUsername2').value === x.username))) {
