@@ -112,16 +112,7 @@ class Component2 extends React.Component {
                 .then(document.getElementById('idMessage1').innerHTML='added a user')
                 .then(document.getElementById('idUsername2').value='')
                 .then(document.getElementById('idPassword2').value='')
-              } else {
-                fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
-                  method: 'POST',
-                  body: JSON.stringify({"items":[{"username":document.getElementById('idUsername2').value, "password": hash}]}),
-                  headers: {"Content-Type":"application/json"},
-                })
-                .then(document.getElementById('idMessage1').innerHTML='added a user')
-                .then(document.getElementById('idUsername2').value='')
-                .then(document.getElementById('idPassword2').value='')
-              }
+              } 
             });
           });
         }
