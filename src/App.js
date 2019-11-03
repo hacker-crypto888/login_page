@@ -10,7 +10,8 @@ class Component2 extends React.Component {
     this.state = { values:[], username: '', password:'', plainTextPassword1:'', password1:'', username1:'', password2:'', username2:'', };
   }
   componentDidMount = () => {
-    document.getElementById('idMessage1').innerHTML = 'my messageeeeee';
+    //document.getElementById('idMessage1').innerHTML = 'my messageeeeee';
+    document.getElementById('btnSignup').setAttribute('disabled','disabled');
     //fetch('https://api-words-texts-write.herokuapp.com/test')
     //  .then(res=>res.text())
     //  .then(resp=>document.getElementById('idMessage1').innerHTML = resp)
@@ -95,12 +96,8 @@ class Component2 extends React.Component {
       .then(res => res.json())
       .then(res=>res.items)
       .then(passwords => {
-        if((passwords.length!==0) && (passwords.some(x=> document.getElementById('idUsername2').value === x.username))||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0){
-          document.getElementById('idUsername2').classList.add('error-signin');
-          document.getElementById('idPassword2').classList.add('error-signin');
-          if((passwords.length!==0) && (passwords.some(x=> document.getElementById('idUsername2').value === x.username))) {
-            document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
-          }
+        if((passwords.length!==0) && (passwords.some(x=> document.getElementById('idUsername2').value === x.username))) {
+          document.getElementById('idMessage2').innerHTML = "<p>username already taken</p>";
           return;
         }
         bcrypt.genSalt(10, function(err, salt) {
@@ -128,6 +125,11 @@ class Component2 extends React.Component {
       password2:
         event.target.password2,
     });
+    if((this.state.password2 !== null) && (this.state.username2 !== null)){
+      document.getElementById('btnSignup').removeAttribute('disabled');
+    } else {
+      document.getElementById('btnSignup').setAttribute('disabled','disabled');
+    }
     const values = [this.state.username1, this.state.password1, this.state.username2, this.state.password2];
     this.setState({values});
     function sort(item){
