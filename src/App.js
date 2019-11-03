@@ -69,7 +69,12 @@ class Component2 extends React.Component {
 
   signUp = (event) => {
     const values = [this.state.username1, this.state.password1, this.state.username2, this.state.password2];
-    if(values.some(x=>[' '].includes(x[x.length-1]))) {
+    this.setState({values});
+    function sort(item){
+      if(item === undefined) {return;}
+      return item.length > 0;
+    }
+    if(this.state.values.filter(sort).some(x=>[' '].includes(x[x.length-1]))) {
       document.getElementById('idMessage1').innerHTML = '<p style=\"color:#FF0000\">there must be an error with the password or username you entered. check them again.</p>';
       return;
     } else {
