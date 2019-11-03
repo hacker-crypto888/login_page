@@ -29,6 +29,7 @@ class Component2 extends React.Component {
     //const password = 
     fetch('https://api-words-texts-write.herokuapp.com/userdata') //returns the json containing all the passwords
       .then(res => res.json())
+      .then(res=>res.items)
       .then(passwords => {
         document.getElementById('idMessage2').innerHTML += 'content json'+JSON.stringify(passwords);
         if(passwords.some(x=> bcrypt.compareSync(document.getElementById('idPassword1').value, x.password) && document.getElementById('idUsername1').value === x.username)) {
@@ -58,8 +59,11 @@ class Component2 extends React.Component {
     //const password = 
     const username = this.state.username2;
     const password = this.state.password2;
+    if(username.length === 0) {return;}
+    if(password.length === 0) {return;}
     fetch('https://api-words-texts-write.herokuapp.com/userdata') //returns all users' pass
       .then(res => res.json())
+      .then(res=>res.items)
       .then(passwords => {
         document.getElementById('idMessage2').innerHTML += JSON.stringify(passwords);
         if((passwords.length!==0)&&(passwords.some(x=> username === x.username)||document.getElementById("idUsername2").value.length === 0||document.getElementById("idPassword2").value.length === 0)) {
@@ -69,15 +73,25 @@ class Component2 extends React.Component {
         } else {
           bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(password, salt, function(err, hash) {
-              fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
-                method: 'POST',
-                body: JSON.stringify(passwords.push({"username":username, "password": hash})),
-                headers: {"Content-Type":"application/json"},
-
-              })
-              .then(res=>res.json())
-              .then(res2=>document.getElementById('idMessage2').innerHTML =res2)
-              // Store hash in your password DB.
+              if(passwords.length){
+                fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
+                  method: 'POST',
+                  body: JSON.stringify({"items":passwords.push({"username":username, "password": hash})}),
+                  headers: {"Content-Type":"application/json"},
+                })
+                .then(res=>res.json())
+                .then(res2=>document.getElementById('idMessage2').innerHTML =res2)
+                // Store hash in your password DB.
+              } else {
+                fetch('https://api-words-texts-write.herokuapp.com/writeallusers', { //write all the passwords together
+                  method: 'POST',
+                  body: JSON.stringify({"items":[{"username":username, "password": hash}]}),
+                  headers: {"Content-Type":"application/json"},
+                })
+                .then(res=>res.json())
+                .then(res2=>document.getElementById('idMessage2').innerHTML =res2)
+                // Store hash in your password DB.
+              }
             });
           });
         }
