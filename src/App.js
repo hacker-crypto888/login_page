@@ -11,9 +11,23 @@ class Component2 extends React.Component {
   }
   componentDidMount = () => {
     document.getElementById('idMessage1').innerHTML = 'my messageeeeee';
-    fetch('https://api-words-texts-write.herokuapp.com/test')
-      .then(res=>res.text())
-      .then(resp=>document.getElementById('idMessage1').innerHTML = resp)
+    //fetch('https://api-words-texts-write.herokuapp.com/test')
+    //  .then(res=>res.text())
+    //  .then(resp=>document.getElementById('idMessage1').innerHTML = resp)
+    fetch('https://api-words-texts-write.herokuapp.com/userdata') //returns the json containing all the passwords
+      .then(res => res.json())
+      .then(res=>res.items)
+      .then(res=>{
+        if (!(res.length)){
+          document.getElementById('idPassword1').setAttribute('disabled','disabled');
+          document.getElementById('idUsername1').setAttribute('disabled','disabled');
+          document.getElementById('btnSignin').setAttribute('disabled','disabled');
+          document.getElementById('idMessage1').innerHTML = 'Sign up first';
+        }
+      })
+      //document.getElementById('idPassword1').removeAttribute('disabled');
+      //document.getElementById('idUsername1').removeAttribute('disabled');
+      //document.getElementById('btnSignin').removeAttribute('disabled');
     document.getElementsByClassName('inputtext').onClick = (event) => {
       event.target.onkeydown =(event) => {
         event.target.focus();
@@ -25,6 +39,7 @@ class Component2 extends React.Component {
     document.getElementById('idPassword1').className="";
     if(document.getElementById('idPassword1').value.length === 0) {return;}
     if(document.getElementById('idUsername1').value.length === 0) {return;}
+
     //const username = 
     //const password = 
     fetch('https://api-words-texts-write.herokuapp.com/userdata') //returns the json containing all the passwords
@@ -99,6 +114,7 @@ class Component2 extends React.Component {
           });
         }
       });
+    window.location.href = '';
   }
   onChange = (event) => {
     this.setState({
