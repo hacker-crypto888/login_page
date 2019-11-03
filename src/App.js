@@ -138,6 +138,7 @@ class Component2 extends React.Component {
     const values = [this.state.username1, this.state.password1, this.state.username2, this.state.password2];
     this.setState({values});
     function sort(item){
+      if(item === undefined) {return;}
       return item.length > 0;
     }
     if(this.state.values.filter(sort).some(x=>[' '].includes(x[x.length-1]))) {
