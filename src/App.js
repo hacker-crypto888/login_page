@@ -52,14 +52,14 @@ class Component2 extends React.Component {
           //post message to api to say that the password is correct and send the username. at reception the connection must be allowed for this user
           fetch('https://api-words-texts-write.herokuapp.com/username', {
             method: 'POST',
-            body: JSON.stringify({"username":document.getElementById('idUsername1').value, "login": "correct"}),
+            body: JSON.stringify({"info":[document.getElementById('idUsername1').value, "correct"]}),
             headers: {"Content-Type":"application/json"},
           });
           window.location.href="https://words-texts-write.herokuapp.com/";
         } else {
           fetch('https://api-words-texts-write.herokuapp.com/username', {
             method: 'POST',
-            body: JSON.stringify({"username":document.getElementById('idUsername1').value, "login": "incorrect"}),
+            body: JSON.stringify({"info":[document.getElementById('idUsername1').value, "incorrect"]}),
             headers: {"Content-Type":"application/json"},
           });
           document.getElementById('idUsername1').classList.add('error-signin');
